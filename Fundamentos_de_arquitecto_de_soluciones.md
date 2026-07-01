@@ -217,6 +217,7 @@ a continuacion se listaran las diferentes metricas que utilizaremos como arquite
     * Tasas de éxito de la administración de cambios
     * Cobertura de automatizació
 *Seguridad*
+
 * Tasas de incidentes de seguridad
 * Tiempo de aplicación de parches en los sistemas
 * Resultados de la auditoría de cumplimiento
@@ -224,27 +225,34 @@ a continuacion se listaran las diferentes metricas que utilizaremos como arquite
 * Cantidad de hallazgos de seguridad
 * Tiempo para responder a eventos de seguridad
 *Fiabilidad*
+
 * Porcentaje de disponibilidad del sistema
 * Objetivo de tiempo de recuperación (RTO)
 * Objetivo de punto de recuperación (RPO)
 * Tasas de error
 * Cantidad de conmutaciones por error exitosas
 * Cumplimiento del acuerdo de nivel de servicios (SLA)
+
 *Eficiencia del rendimiento*
+
 * Tasas de uso de recursos
 * Tiempos de respuesta
 * Métricas de latencia
 * Rendimiento
 * Métricas de escalabilidad del sistema
 * Tasas de aciertos de caché
+
 *Optimiazion de costos*
+
 * Costo por unidad de trabajo
 * Uso de recursos en comparación con el costo
 * Identificación y reducción de residuos
 * Cobertura de instancias reservadas
 * Exactitud en la asignación de costos
 * ROI de las inversiones en la nube
+
 *Sostenibilidad*
+
 * Métricas de la huella de carbono
 * Eficacia de los recursos
 * Administración del ciclo de vida del hardware
