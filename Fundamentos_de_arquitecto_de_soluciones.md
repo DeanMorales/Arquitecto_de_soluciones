@@ -82,6 +82,62 @@ dentro de la planificacion y admin. tenemos los diferentes servicios que el arqu
  * *Draw.io*: herramientas de diagramas de arquitectura
  * Repositorios de GIT: control de versiones para proyectos y plantillas. 
 
+## Impacto empresarial
+los arquitectos de soluciones al momento de trabajar, diseñar y construir la infraestructura de AWS deben conseguir un valor empresarial real a traves de impactos. el valor real surge de las ventajas competitivas, la satisfaccion de nuestro cliente y oportunidades de crecimiento empresarial. 
+
+### Beneficios
+
+#### Financieros 
+como siempre el cochino dinero
+* **optimizacion de los costos:** reduciendo por encima del 20% hasta donde llegues, en costos totales de infraestructura mediante el dimensionamiento correcto de los recursos, la implementacion del escalado automatico y el aprovechamiento de los modelos de precios de AWS, por ejemplo las instancias reservadas con picos predecibles, instancias spot de cargas de trabajo no criticas, o que pueden soportar caidas temporales.
+
+* **Cambio de CapEX a OpEx:** donde transformamos los gastos de capital inicial, cuando cotizamos el total de la infraestructura cuando realmente en AWS podemos cambiarlo por gastos operativos predecibles gracias a los servicios de Admin y costos en AWS. 
+
+#### Excelencia operativa
+
+* **Escalabilidad:** las empresas pueden escalar rapidamente todos sus recursos para satisfacer la demanda sin aprovisionamiento excesivo.
+
+* **Velocidad de comercializacion:** podemos crear y destruir nuestras nuevas arquitecturas en cuestion de horas o incluso minutos haciendo uso de las plantiallas YAML o stacks de terraform. en vez de semanas. 
+
+* **Reduccion de la deuda tecnica:** entenamos la deuda tenica  como un proceso continuo donde debemos refactorizar o pagar ese codigo que desplegamos, utilizar esa tecnologia y el costo impolicito futuro. 
+
+#### Agilidad Empresarial
+
+* **Aceleracion de la innovacion:** se brinda accesso a mas de 200 servicios de AWS especializados que permiten la creacion rapida de prototipos. 
+* **Continuidad de actividades:** se diseñan arquitecturas resilientes de varias AZ y varias regiones que minimizan los riesgos de tiempo de inactividad. 
+* **Alacnce global:** esta es buena pues elimina los orizontes y facilita una expancio rapida en nueos mercados geograficos con una sobrecarga minima de infraestructura. 
+
+##### Riesgos
+
+* **seguridad mejorada:** gracias a los servicios integrales de AWS podemos dar una proteccion mas profunda.
+
+* **Cumplimiento:** debemos cumplir con los requisitos normativos, aunar mas profundo en cada uno de las distintas normas.
+
+* **Capacidades de recuperacion ante desastres:** se crean las estrategias necesarias, estas en el pasado eran inexistentes. gracias a la arquitectura de la nube de AWS podemos generar distintos planes y como minimizar el tiempo de inoperabilidad. 
+
+## Arquitectura en la nube
+en este capitulo apreciamos la relevancia que trae el framework del WAF. antes de la nube y ahora en la nube, las cargas de trabajo se diseñaban de maneras diferentes y siempre con pura intuicion, por lo general era demasiado costoso y solo se hacia al principio del proyecto, una vez en produccion, dificilmente se pondrian a preguntarse, que cambios, que mejoras o incluso que nuevas tecnologias podrian adoptar.
+El Framework del WAF, te ayuda a entender las ventajas y desventajas de las decisiones que tomas durante la creacion de las cargas de trabajo en AWS. Tener un  sistema bien diseñado ayuda muchisimo a mejorar la probabilidad de exito empresarial.
+
+## Marco de AWS Well-Architected
+
+ahora vamos al ¿ por que ?
+* **Crear e implentar con mayor velocidad:**
+* **Disminuir o mitigar los riesgos:**
+* **Tomar decisiones fundamentadas:** 
+* **Aprender sobre las practicas recomendadas de AWS** 
+
+> WAF es una herramienta de cuantificacion de los riesgos. debemos aprender, compara y mejorar siempre nuestras arquitecturas en la nube a lo largo de todo el ciclo de vida. 
+>> lo que no se mide, no se mejora...
+
+repasemos 4 conceptos muy importantes en el framework
+
+1. Pilare
+2. Principios de diseño
+3. Enfoques
+4. Preguntas 
+
+
  
 
 
