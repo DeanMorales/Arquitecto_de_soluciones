@@ -132,14 +132,62 @@ ahora vamos al ¿ por que ?
 
 repasemos 4 conceptos muy importantes en el framework
 
-1. Pilare
+1. Pilares
 2. Principios de diseño
 3. Enfoques
 4. Preguntas 
 
+### Pilares
+ tenemos los 6 pilares del Marco del Buen Arquitecto
+ 1. Excelencia Operativa
+    * la capacidad de ejecutar y supervisar los sistemas para generar valor empresarial y para mejorar de forma continua los procesos y procedimientos de respaldo.
 
+ 2. Fabilidad
+    * la capacidad de que tu workload  trabaje de forma correcta y uniforme, en otras palabras que no de lata y que sea fiable
+    * recuperarse de errores en la infraestructura o interrupciones del servicio. que planees los errores antes de que ocurran y te prepares.
+    * adquirir de manera dinamica recursos de computo para satisfacer la demanas, me suena a el Grupo de autoScaling
+    * Mitigar interrupciones, como errores de configuracion o problemas transitorios de la red.
+ 3. Seguridad: la capacidad de proteger la informacion, los sistemas y los activos y al mismo tiempo, ofrecer valor empresarial mediante evaluaciones de riesgos y estrategias de mitigacion.
+
+ 4. Eficiencia en el rendimiento: la capacidad de utilizar recursos de computo de manera eficaz para satisfacer los requisitos del sistema. asimismo, implica la capacidad de mantener esta eficacia a medida que cambia la demanda y evolucionan las tecnologias.
  
+ 5. Optimizacion de costos: esta esta facil, entre menos gastes mejor, el pilar mas deseado de las empresas. pero que siga cumpliendo con los objetivos del sistema.  
+ 6. sostenibilidad: recordemos que codear, maquinas virtuales de github, utilizan recursos computacionales y eso aunmenta nuestra huella de carbono. aunmentar la eficienci en los componentes de una carga de tragbajo es necesario,maximizando los beneficios de los recursos
 
+### Principios de Diseño
+Basicamento son conceptos y formas de pensar que debe considerar al momento de diseñar una carga de trabajo.
+    Por ejemplo, dentro del pilar de seguridad, uno de los aspectos que debe tener en cuenta es el cifrado. ¿que es lo que hay que cifrar y cuando hay que hacerlo.
+
+El marco proporciona preguntas que se basan en los pilares, esta basados en años de conocimientos de los puntos debiles comunes de los clientes.
+
+
+
+### Enfoques 
+    los enfoques compara constantemente sus arquitecturas con las practicas recomendadas e identificar las areas de mejora. 
+
+### Preguntas
+ya trae definidar un conjunto de preguntas basadas en los principios de diseño en seis pilares.
+    las preguntas facilitan una conversacion que birnda infroamcion y podemos resolver los problemas.
+
+Amazon hace una analogia a construir un edificio, si no contiene las bases solidas, los problemas en la estructura pueden socavar la integridad y el funcionamiento del edificio. 
+
+    los 6 pilares del framework se basan en principios de diseño para crear un sistema que funcion de acuerdo  a las espectativas.
+> una parte escencial de las preguntas es que en la herramienta del welll-architected tool, nos va guiando a lo largo de todos los pilares y son preguntas que ya vienen aprovadas y testeadas, nos ayudan a enclareser las desiciones que hay que tomar si o si al diseñar nuestro servicio y como ira actualizando.
+
+## Herramienta de AWS Well-Architected 
+
+las workloads siempre ofrecen un valor empresarial. se deben actualizar y marcar los hitos para ver como mejora con el timepo. una especie de versionamiento de nuestros stacks tecnologicos.
+
+la **Herramienta de AWS Well-Architected (AWS WA) es una app web, en la consola, es de autoservicio. 
+
+### Revision de Well-Architected
+
+como buena constumbre siempre es recomendado evaluar nuestra workload, y ver si cumple el marco. 
+puntos importantes: 
+
+* el problema mas comun no son las malas decisiones. sino, las personas que descuidan la decision y ni siquiera hablan sobre ella.
+
+* la mayoria de workloads tienen elementos de alto riesgo. debes abordarlos, asi puedes evitar eventos que dañen  o ralenticen su empresa.
 
 
 
