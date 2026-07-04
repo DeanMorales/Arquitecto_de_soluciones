@@ -432,3 +432,5 @@ Los clientes son responsables de la seguridad en la nube. Cuando utiliza cualqui
 El nivel de responsabilidad de los clientes depende del servicio de AWS. Algunos servicios requieren que el cliente realice todas las tareas de configuración y administración de seguridad necesarias. Otros servicios más abstractos requieren que los clientes solo administren los datos y controlen el acceso a sus recursos. Cuando se utilizan las dos categorías de servicios de AWS, los clientes pueden determinar su nivel de responsabilidad para cada servicio de AWS que utilicen.
 
 # Aspectos basicos de las redes
+
+hasta aqui la clase de hoy 
