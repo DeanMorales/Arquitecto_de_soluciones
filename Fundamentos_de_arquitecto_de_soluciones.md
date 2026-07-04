@@ -260,3 +260,51 @@ a continuacion se listaran las diferentes metricas que utilizaremos como arquite
 * Reducción del impacto ambiental
 * Prácticas de arquitectura sostenible
 
+## Practicas recomendadas
+ >se organizan en tornos a los 6 pilares clave del well-architected. te guian al momento de crear una infreaestructura de aplicaciones seguras y de alto rendimiento, resiliente y eficiente.
+
+ a continuancion se listan algunas de las practicas recomendadas.
+ 
+ ### Seguridad
+
+ 1. **Defensa en profundidad**: implementar muchos controles de seguridad en las diferentes capas.
+ 2. **Administracion de identitades y accesos**: utilice AWS IAM con el principio de minimo privilegio. 
+ 3. **proteccion de datos**: cifre los datos en reposo y en transito con KMS y CloudHSM. 
+ 4. **Seguridad de la red:** Implemente grupos de seguridad, ACL de la red, WAF y Shield.
+ 5. **cumplimiento y auditoria**: utilice AWS Config y Security Hub. 
+
+ ### Optimizacion de costos.
+
+ * **Dimesionamiento adecuado de los recursos:** utilice recursos dimensionados correctamente para su carga de trabajo.
+ * **Instancias reservadas y Saving Plans:** comprometase a usarlos para obtener descuentos significactivos.
+ * **Instancias Spot:** debemos aprovechar nuestras cargas de trabajo no criticas y utilizar estos descuentos.
+ * **Supervision de costos:** Implementar el explorador de costos y presupuestos de AWS.
+ * **Politicas de cliclo de vida del almacenamiento:** automatice la migracion de datos a niveles de menor costo.
+
+### Fiabilidad
+
+* **Aislamiento de errores:** utilice varias zonas de disponibilidad y regiones.
+* **Escalado:** implemente el escalado automatico en las cargas de trabajo dinamicas.
+* **Planificacion de recuperacion:** diseñar con el objetivo de una recuperacion automatica y una perdida de datos minima.
+* **Prueba de los procedimientos** de recuperacion: realice pruebas de recuperacion de desastres con regularidad.
+* **Acoplamiento debil:** diseñe servicios para reducir las interdependencias.
+
+### Eficiencia del rendimiento
+
+* **Dimensionamiento correcto de los recursos:** selecciones los tipos de instancias adecuados para su carga de trabajo.
+* **Aprovechamiento de los servicios adminstrados:** utilice los servicios de AWS en lugar de administrar la infraestructura
+* **Almacenamiento en cache:** implementacion de ElastiCache o CloudFront para mejorar el rendimiento.
+* **Optimizacion del almacenamiento de datos:** elija el servicio de almacenamiento adecuado *S3, EBS, EFS*
+* **Arquitectura sin servidor:** considere *Lambda* para las cargas de trabajo impusladas por eventos.
+
+### Excelencia operativa
+* **Infraestructura como codigo:** Considere utilizar CloudFormation para automatizar las implementaciones.
+* **Supervision y observabilidad:** Implementar *CLoudWatch,  X-Ray y CloudTrail*.
+* **Integracion y entrega continua:** aproveche AWS CodePïpeline, Codebuild y CodeDeploy.
+* **Manuales de procedimientos y guias:** documente los procedimientos para las opreaciones rutinarias y la respuesta ante incidentes. 
+
+### Sostenibilidad
+* **Uso de los recursos:** maximice la eficiencia para minimizar el impacto del entorno.
+* **Seleccion de regiones:** elija regiones con fuentes de energia mas sostenibles siempre que sea posible.
+* **Servicios admnistrados:** aproveche las economias de escala de AWS para aumnetar la sostenibilidad.
+* **Optimizacion de las cargas de trabajo** mejore la eficiencia del codigo para reducir las necesidades de computacion. 
