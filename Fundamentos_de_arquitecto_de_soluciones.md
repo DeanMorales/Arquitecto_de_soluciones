@@ -260,3 +260,177 @@ a continuacion se listaran las diferentes metricas que utilizaremos como arquite
 * Reducción del impacto ambiental
 * Prácticas de arquitectura sostenible
 
+## Practicas recomendadas
+ >se organizan en tornos a los 6 pilares clave del well-architected. te guian al momento de crear una infreaestructura de aplicaciones seguras y de alto rendimiento, resiliente y eficiente.
+
+ a continuancion se listan algunas de las practicas recomendadas.
+ 
+ ### Seguridad
+
+ 1. **Defensa en profundidad**: implementar muchos controles de seguridad en las diferentes capas.
+ 2. **Administracion de identitades y accesos**: utilice AWS IAM con el principio de minimo privilegio. 
+ 3. **proteccion de datos**: cifre los datos en reposo y en transito con KMS y CloudHSM. 
+ 4. **Seguridad de la red:** Implemente grupos de seguridad, ACL de la red, WAF y Shield.
+ 5. **cumplimiento y auditoria**: utilice AWS Config y Security Hub. 
+
+ ### Optimizacion de costos.
+
+ * **Dimesionamiento adecuado de los recursos:** utilice recursos dimensionados correctamente para su carga de trabajo.
+ * **Instancias reservadas y Saving Plans:** comprometase a usarlos para obtener descuentos significactivos.
+ * **Instancias Spot:** debemos aprovechar nuestras cargas de trabajo no criticas y utilizar estos descuentos.
+ * **Supervision de costos:** Implementar el explorador de costos y presupuestos de AWS.
+ * **Politicas de cliclo de vida del almacenamiento:** automatice la migracion de datos a niveles de menor costo.
+
+### Fiabilidad
+
+* **Aislamiento de errores:** utilice varias zonas de disponibilidad y regiones.
+* **Escalado:** implemente el escalado automatico en las cargas de trabajo dinamicas.
+* **Planificacion de recuperacion:** diseñar con el objetivo de una recuperacion automatica y una perdida de datos minima.
+* **Prueba de los procedimientos** de recuperacion: realice pruebas de recuperacion de desastres con regularidad.
+* **Acoplamiento debil:** diseñe servicios para reducir las interdependencias.
+
+### Eficiencia del rendimiento
+
+* **Dimensionamiento correcto de los recursos:** selecciones los tipos de instancias adecuados para su carga de trabajo.
+* **Aprovechamiento de los servicios adminstrados:** utilice los servicios de AWS en lugar de administrar la infraestructura
+* **Almacenamiento en cache:** implementacion de ElastiCache o CloudFront para mejorar el rendimiento.
+* **Optimizacion del almacenamiento de datos:** elija el servicio de almacenamiento adecuado *S3, EBS, EFS*
+* **Arquitectura sin servidor:** considere *Lambda* para las cargas de trabajo impusladas por eventos.
+
+### Excelencia operativa
+* **Infraestructura como codigo:** Considere utilizar CloudFormation para automatizar las implementaciones.
+* **Supervision y observabilidad:** Implementar *CLoudWatch,  X-Ray y CloudTrail*.
+* **Integracion y entrega continua:** aproveche AWS CodePïpeline, Codebuild y CodeDeploy.
+* **Manuales de procedimientos y guias:** documente los procedimientos para las opreaciones rutinarias y la respuesta ante incidentes. 
+
+### Sostenibilidad
+* **Uso de los recursos:** maximice la eficiencia para minimizar el impacto del entorno.
+* **Seleccion de regiones:** elija regiones con fuentes de energia mas sostenibles siempre que sea posible.
+* **Servicios admnistrados:** aproveche las economias de escala de AWS para aumnetar la sostenibilidad.
+* **Optimizacion de las cargas de trabajo** mejore la eficiencia del codigo para reducir las necesidades de computacion. 
+
+---
+
+>todas estas practicas deben evaluarse y aplicarse de forma continua durante todo el ciclo de vida de las aplicaciones y la Infraestructura basadas en AWS.
+
+## Planificacion
+
+>no solo es el primier paso de la arquitectura, es un paso fundamental. garantiza que cuente con todos los aspectos cruciales.
+
+1. Comience con los requisitos empresariales
+2. implemente un diseño9 a prueba de fallas
+3. implemente la seguridad en todos los niveles
+4. automatice cuando sea posible
+5. utilice servicios administrados
+6. Supervise y realice mediciones
+7. mantengase al dia. 
+
+## Recursos de planificacion
+
+determine los requisistos formulando las preguntas correctas a fin de ayudar a perfeccionar el alcance y la precision de su arquitectura.
+
+[Ir al Centro de Arquitecturas](https://aws.amazon.com/es/architecture/how-to-build-this/?tma.sort-by=item.additionalFields.airDate&tma.sort-order=desc&awsf.categories=*all)
+
+## Requisitos funcionales frente a no funcionales
+
+>El objetivo fianl de un proyecto es entregar un producto de alta calidad tal y como lo solicito el cliente.
+
+### Funcionales 
+
+**Requisitos Funcionales**: Definen lo que un producto o sistema debe hacer y cuales son sus caracteristicas y funciones.
+
+    * los **requisitos funcionales** son la principale forma en que un cliente expresa susrequisitos al equipo del proyecto.
+    * los **requisitos funcionales** ayudan a que el equipo del proyecto avance en la direccion correcta.
+
+|  concepto     |         Funcionales |
+| ------------- | ------------------------------ |
+|  Objetivo      | Describen lo que hace el producto |
+| Resultado Final | Definen las caracteristicas del producto |
+| Enfoque       | Se enfocan en los requisitos delusuario |
+| documentacion | Capturados en el caso de uso |
+| Esencialidad | Obligatorios |
+| tipo de origen | Definidos por el usuario |
+| pruebas |     Pruebas de componentes, Api e interfaz del usuario |
+
+### No Funcionales
+
+**Requisitos no funcionales**: describen las propiedades generales de un sistema.
+
+Por lo general, un clinete tiene necesidades y **deseos**:
+    - Despues de analizar la estimacion de costos, es posible que solicite reducir el alcances(normalmente, eliminar algunos de los requisitos no funcionales reduce el alcance). 
+        - muchos **requisitos no funcionales** pueden aumentar rapidamente el costo.
+        - la **insuficiencia de requisitos no funcionales** puede causar una mala experiencia del usuario.
+
+|   concepto        |       No funcionales
+| ----------------------- | -------------------------------------|
+| objetivo  | describe como funciona el producto |
+| Resultado final | definen las propiedades del producto |
+| enfoque | se enfocan en las expectativas del usuario |
+| documentacion | capturado como atributo de calidad |
+| esencialidad | no son obligatorios, pero son deseables | 
+| tipo de origen | definidos por un desarrollador o un experto en tecnologia |
+| pruebas | pruebas de rendimiento, usabilidad y seguridad | 
+
+---
+
+>carla tecnica "Marco del buen arquitecto: proceso o checklist ?"
+
+duracion 5min y 17 sec. 
+
+# Infraestructura global de AWS 
+    los centros de datos y la conectividad de redes. sigue siendo la base de todas las apliaciones en la nube. en AWS, esta infraestructura fisica constitue la infreastrutura global de AWS en forma de regiones y zonas de disponibilidad.
+
+## centro de datos de AWS 
+
+en 2006, aws fue pionero de la computacion en la nube. AWS innova continuamente el diseño y los sistemas de centros de datos para protegerlos de riesgos ocasionados por el hombre o naturales. como resultados las organizaciones con mayor regulacion del mundo confian en AWS todos los dias
+
+## zonas de disponbilidad
+
+una zona de disponibilidad consta de uno o mas centros de datos discretos, cda uno con capacidad redundante, redes y conectividad en una region de AWS. las varias areas aisladas dentro  de una ubicacion geografica particular. cuando lanza una instanci, puede seleccionar una zona de disponibilida o dejar que AWS elija una por ustd. 
+las AZ funcionan en caso de producirse un erro en un centro de datos, puede diseñar su aplicacion para que de forma automatica se lanace otra en otra AZ.
+
+## regiones 
+Cada region de AWS consta de varias AZ ailadas y separadas fisicamente, gracias a esto se logra mayor tolerancia a errores. y estabilidad posible. en su cuenta, usted determina que regiones necesita. puede ejecutar aplicaciones y caras de trabajo de una region a fin de reducir la latencia par alos usuarios finales. Tambien puede hacer esto mientras evita los gastos iniciales, los compromisos a largo plaazo, los desafios de escalado asociados con el mantenimiento y la operacion de una infraestructura global. 
+
+## Zonas Locales de AWS 
+
+las zonas locales pueden utilizarse para las aplicaciones muy demandantes que requieren una latencia en milisegundos de un solo digito. para los usuarios finales. creacion de contenido multimedia y de entretenimiento, los juegos multijugador en tiempo real, el alojamiento y entrenamiento de machinelearning
+
+## Ubicaciones perifericas 
+
+una ubicacion periferica es el punto mas cercano a un solicitante de un servicio de AWS. Dichas ubicaciones estan situadas en las grandes ciudades del mundo. Reciben solicitudes y almacenan en cache copias de su contenido para agilizar la entrega 
+
+### selecion de region 
+
+Son independientes entre sí: sin el consentimiento y la autorización explícitos del cliente, los datos no se replican de una región a otra. Cuando decida en qué región de AWS alojará sus aplicaciones y cargas de trabajo, tenga en cuenta cuatro aspectos principales: la gobernanza, la latencia, la disponibilidad del servicio y el costo.
+
+### diferencias reales de AWS Local Zones y Edge Locations
+
+| AWS Local Zones | Edge Lotations |
+|  ------------------------ | ------------------------------- |
+| * baja latencia   |   * Caching of data  |
+| * procesamiento de informacion local | * entrega de contenido rapidisima | 
+| * Experiencia consistente de AWS | * Mejor experiencia de usuario | 
+
+
+# Seguridad y modelo de responsabilidad compartida de AWS 
+
+## Responsabilidad de AWS
+
+AWS es responsable de la seguridad de la nube. Esto significa que AWS protege y asegura la infraestructura que ejecuta los servicios ofrecidos en la nube de AWS. AWS es responsable de lo siguiente:
+
+Proteger y asegurar las regiones, las zonas de disponibilidad y los centros de datos de AWS, hasta la seguridad física de los edificios.
+
+Administrar los componentes de hardware, software y redes que ejecutan los servicios de AWS, como los servidores físicos, los sistemas operativos de host, las capas de virtualización y los componentes de redes de AWS.
+
+El nivel de responsabilidad de AWS depende del servicio. AWS clasifica los servicios en dos categorías, cuya información se detalla en la siguiente tabla, junto con la responsabilidad de AWS.
+
+## Responsabilidad del cliente 
+
+Los clientes son responsables de la seguridad en la nube. Cuando utiliza cualquier servicio de AWS, el cliente es responsable de configurar correctamente el servicio y sus aplicaciones, y garantizar que sus datos estén seguros.
+
+El nivel de responsabilidad de los clientes depende del servicio de AWS. Algunos servicios requieren que el cliente realice todas las tareas de configuración y administración de seguridad necesarias. Otros servicios más abstractos requieren que los clientes solo administren los datos y controlen el acceso a sus recursos. Cuando se utilizan las dos categorías de servicios de AWS, los clientes pueden determinar su nivel de responsabilidad para cada servicio de AWS que utilicen.
+
+# Aspectos basicos de las redes
+
+hasta aqui la clase de hoy 
