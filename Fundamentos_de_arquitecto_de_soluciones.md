@@ -433,4 +433,94 @@ El nivel de responsabilidad de los clientes depende del servicio de AWS. Algunos
 
 # Aspectos basicos de las redes
 
-hasta aqui la clase de hoy 
+## direcciones IP (addressing)
+
+en aws se utilizan la notacion CIDR o enrutamiento entre dominios sin clases. siempre que se vea una direccion seguido de un slash '/'. 
+entre mayor sea el numer , mas pequeña es la red, a menor numero mayor numeros de hosts disponbibles hay para utilizar en las subredes, de manera que tu tengas una red /16, sera una red que tendra 172.31.2.15/16 
+el 2.15 sera el area designada para los hosts. tendras 2 octetos para los hosts. 
+
+en la VPS puedes utilizar la direccion 0.0.0.0/0 que representa todo el rango de direcciones ip disponibles, para uso interno. 
+
+* una direcion IP identifica la ubicacion de un recurso dentro de la red, en resumen esta dividida en 2 partes, la parte de la red y la parte del host, 
+
+### direccion IPv4
+la direccion IPv4 salio en los años 80s y utiliza direcciones de 32 bits, se agrupan en octetos.
+se anotan en direccion numerica decimal. pueden crear mas de 4300 millones de direcciones, es decir se deben volver a usar y se deben enmascarar.
+
+### direccion IPv6
+
+en el 98 se desarrollo las IPv6 Para remplazar a las IPV4, Utiliza direcciones de **128** bits, las direcciones se dividen en 8 grupos de cuatro digitos, hexadecimales para un total de 128 bits, los grupos se escriben con el signo de los dos puntos por separado.
+ 
+    50b2:6400:0000:0000:0000:6c3a:b17d:0:10a9
+
+las direcciones IPv6 admiten la configuracion automatica.
+
+cuando creas tu red en **AWS** con componentes de la VPC, especificas los bloques de CIDR y subredes. debes asignar la cantidad suficiente de direcciones IP para adminitir los recuruso de la red. puede contener hasta 5 bloques CIDR y los intervalos de direcciones no dse pueden superponer.
+
+>debemos dar un estudio mas profundo acerca de la notacion CIDR y la practica de como dividir nuestra VPC en *n* cantidad de subredes, no olvidemos que muchos de los recursos deben estar organizados en subredes. 
+>> recordar que la red mas pequeña es la de /28 con 16 direcciones IP y la mayor disponible es la de /16 que contiene un max de 65 536. 
+
+En resumen, la red se puede identificar usando de 16 a 28 bits en la dirección IPv4 de 32 bits. Por otro lado, los recursos en la subred se pueden identificar con 4 a 16 bits en la dirección IPv4 de 32 bits.
+
+> puedes utilizar esta herramienta online para practicar y visualizar la notacion CIDR, calcular subredes y entender mejor la distribucion de direcciones IP en tu VPC.
+
+[calculadora de CIDR](https://cidr.xyz/)
+
+## Amazon VPC 
+
+es el entorno de la red en la nube, con **VPC**, puede iniciar recursos de AWS en una red virtual que usted defina. las VPC se implementan en una de las regiones de AWS. y pueden alojar recursos de cualquier zona de disponbilidad dentro de esa region. 
+
+### Subred
+
+es un rango de direciones IP dentro de la VPC. existen subredes publicas y privadas, que es lo que convierte una subred privada a una publica ????
+la respuesta es una ruta hacia el exterior. 
+como logramos esto?. mediante 2 cosas, la creacion de un Internet Gateway, despues crear la ruta dentro de la route table de casa subred.
+
+hay que considerar que aunque tengamos una subredpublica no garantiza la comunicacion entre instanciaas a internet, porque aun debemos configurar el firewall del grupo de seguridad en las EC2. 
+
+puntos fuertes a considerar:
+* una subred no puede ser mas grande que la VPC que la contiene. 
+* existen subredes publicas y privadas.
+* por defecto toda subred contiene una tabla de enrutamiento.
+* la mejor practicas de segurida es nunca exponer nuestros recursos criticos en las subredes publicas, sino crear una ruta desde la privada, que los lleve hasta la internetgateway.
+
+### componentes de la VPC
+
+#### subredes publicas
+
+Una subred pública está asociada a una tabla de enrutamiento que tiene una ruta a una puerta de enlace de internet. Le permite comunicarse con recursos dentro de la subred desde la Internet pública mediante la asignación de direcciones IP públicas. La configuración de la subred pública actúa como una puerta bidireccional: permite que el tráfico fluya en ambas direcciones, ya sea solicitado o no.
+
+Las subredes públicas utilizan lo siguiente:
+
+Las puertas de enlace de internet permiten la comunicación entre los recursos de la VPC e internet.
+Las tablas de enrutamiento son un conjunto de reglas que la VPC usa para enrutar el tráfico de red. En una subred pública, incluye una ruta a la puerta de enlace de internet.
+Las direcciones IP públicas son accesibles desde internet. 
+Las direcciones IP privadas solo son accesibles en la red.
+
+#### puerta de enlace de internet 
+
+Una puerta de enlace de internet es un componente de la VPC de alta disponibilidad, redundante y que se escala de forma horizontal que permite la comunicación entre las instancias en la VPC e internet. Por lo tanto, no representa riesgos de disponibilidad ni limitaciones de ancho de banda en su tráfico de red. Una puerta de enlace de internet admite el tráfico IPv4 e IPv6.
+
+Una puerta de enlace de internet tiene dos propósitos: 
+
+2. Proporciona un objetivo en su tabla de enrutamiento para el tráfico enrutable de internet.
+
+2. Protege las direcciones IP en su red mediante la traducción de direcciones de red (NAT).
+
+Una puerta de enlace de internet realiza la traducción de direcciones de red (NAT) asignando las direcciones IP públicas y privadas. En este ejemplo, la puerta de enlace de internet traduce la dirección IP fuente de una solicitud desde una dirección IP privada utilizada en la red (172.31.2.15) a una dirección IP pública (54.56.9.10). El destinatario dirige su respuesta a la dirección IP pública. La puerta de enlace de internet recibe la respuesta y traduce la dirección IP pública para la dirección IP privada con la que coincide. La VPC enruta la respuesta para el solicitante.
+
+#### Tablas de enrutamiento
+
+Una tabla de enrutamiento contiene una serie de reglas (rutas) que se utilizan para determinar hacia dónde se dirige el tráfico de red. Cuando crea una VPC, esta tiene automáticamente una tabla de enrutamiento principal. Inicialmente, la tabla de enrutamiento principal (y todas las de una VPC) contiene una única ruta: una ruta local con la que se puede establecer la comunicación de todos los recursos dentro de la VPC. No se puede modificar la ruta local en una tabla de enrutamiento. Cuando quiere iniciar una instancia en la VPC, la ruta local automáticamente cubre esa instancia. Se pueden crear tablas de enrutamiento personalizadas adicionales para su VPC.
+
+#### subredes privadas
+
+Las subredes privadas permiten el acceso indirecto a Internet. El tráfico se queda dentro de su red privada. Una dirección de IP privada asignada a una instancia de EC2 no cambiará a menos que se asigne manualmente una nueva dirección IP en la interfaz de red de la instancia de EC2. 
+
+Aunque puede poner las instancias de nivel web en una subred pública, le recomendamos que las ponga dentro de subredes privadas detrás de un equilibrador de carga ubicado en una subred pública. Más adelante en este curso abordaremos Elastic Load Balancing (ELB).
+
+#### VPC predeterminada
+
+Todas las cuentas de AWS traen una VPC predeterminada y está configurada para que la pueda utilizar de inmediato. No necesita crear y configurar su propia VPC. Este es el gráfico de una VPC predeterminada. El bloque de CIDR para la VPC predeterminada siempre es una máscara de subred /16. En este ejemplo, el bloque de CIDR de 172.31.0.0/16 implica que esta VPC puede proporcionar hasta 65 536 direcciones IP. Incluye solo una subred pública en cada zona de disponibilidad en la región. Estas subredes utilizan una máscara de subred de /20 y proporcionan 4096 direcciones por subred. También incluye una puerta de enlace de internet. La VPC utiliza una tabla de enrutamiento principal para conectar las subredes a la puerta de enlace de internet.
+
+Las varias capas independientes de seguridad son un factor disuasivo que disminuye el impulso y la efectividad de un ataque. Este enfoque requiere que el atacante atraviese varias capas de defensa especializada. El esfuerzo que requiere montar el ataque lo vuelve difícil y costoso. 
