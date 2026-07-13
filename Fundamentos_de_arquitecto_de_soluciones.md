@@ -524,3 +524,9 @@ Aunque puede poner las instancias de nivel web en una subred pública, le recome
 Todas las cuentas de AWS traen una VPC predeterminada y está configurada para que la pueda utilizar de inmediato. No necesita crear y configurar su propia VPC. Este es el gráfico de una VPC predeterminada. El bloque de CIDR para la VPC predeterminada siempre es una máscara de subred /16. En este ejemplo, el bloque de CIDR de 172.31.0.0/16 implica que esta VPC puede proporcionar hasta 65 536 direcciones IP. Incluye solo una subred pública en cada zona de disponibilidad en la región. Estas subredes utilizan una máscara de subred de /20 y proporcionan 4096 direcciones por subred. También incluye una puerta de enlace de internet. La VPC utiliza una tabla de enrutamiento principal para conectar las subredes a la puerta de enlace de internet.
 
 Las varias capas independientes de seguridad son un factor disuasivo que disminuye el impulso y la efectividad de un ataque. Este enfoque requiere que el atacante atraviese varias capas de defensa especializada. El esfuerzo que requiere montar el ataque lo vuelve difícil y costoso. 
+
+### Lista de control de accesos o ACL para los amigos.
+
+los ACL son una medida opcional para tus VPC que actua como un *Firewall* de acceso, con el objetivo de filtrar y controlar el trafico, por defecto, tu VPC predeterminada y las que crees, contienen una ALC por defecto, ademas que son **sin estado**
+
+**Sin Estado** quiere decir que no recuerdan y si necesitan tener reglas de entrada y de salida. (stateless)
