@@ -529,4 +529,131 @@ Las varias capas independientes de seguridad son un factor disuasivo que disminu
 
 los ACL son una medida opcional para tus VPC que actua como un *Firewall* de acceso, con el objetivo de filtrar y controlar el trafico, por defecto, tu VPC predeterminada y las que crees, contienen una ALC por defecto, ademas que son **sin estado**
 
-**Sin Estado** quiere decir que no recuerdan y si necesitan tener reglas de entrada y de salida. (stateless)
+**Sin Estado*** quiere decir que no recuerdan y si necesitan tener reglas de entrada y de salida. (stateless)
+
+#### Trafico IPv4 entrante y saliente
+
+- Una ACL de la red contiene una lista de reglas numeradas. las evaluamos en orden, comenzando por la regla con el numero mas bajo, para determinar si se permite la entrada o salida de trafico a cualquier subred asociada con la ACL de la red
+- Las VPC incluyen automaticamente una ACL de red predeterminada y modificable. por defecto, todo el trafico IPv4 esta permitido, tanto entrante como saliente. puede crear una ACL de la red personalizada y asociarla a una subred. De forma predeterminada las ACL de la red personalizadas deniegan todo el trafico entrante y saliente hasta que se agreguen las reglas.
+- cada ACL de la red incluye una regla cuyo numero de regla es un asterisco. esta regla garantiza que si un paquete no coincide con ninguna de las demas reglas enumeradas, se denegara. esto no se puede modificar ni eliminar. 
+
+#### Reglas de ACL de la red
+
+Cada ACL de la red incluye una regla cuyo numero de regla es un asterisco. esta regla garantiza que si un paquete no coincide con ninguna de las demas reglas numeradas, se denegara. esto no se puede modificar ni eliminar. entre los componente de una ACL de la red podemos encontrar: 
+
+- numero de la regla: las reglas se evaluan comnezando por la regla con el numero mas bajo. no bien una regla coincide con el trafico, se aplica sin importar que haya otras reglas con numero mas altos que la contradigan.
+- tipo: el tipo de trafico, por ejemplo, Secure Shell o SSH. tambien puede especificar todo el trafico o un intervalo personalizado.
+- protocolo: puede especificar cualquier protocolo que tenga un numero de protocolo estandar.
+- intervalo de puertos: el puerto de escucha o intervalo de puertos para el trafico. por ejemplo el trafico del puerto 80 para HTTP. 
+- Fuente: solo las reglas entrantes, la fuente del trafico(intervalo de CIDR).
+- Destino: solo para reglas salientes, el destino para el trafico(intervalo de CIDR).
+
+las ACL de la red no tiene estados, lo que significa que las respuestas para el trafico entrante permitido estan sujetas a las reglas para el trafico saliente, y viceversa.
+
+### Grupos de seguridad.
+
+los grupos de seguridad funcionan como un firewall virtual de la instancia para controlar el trafico entrante y saliente. los grupos de seguridad actuan en el nivel de la interfaz de red, no en el nivel de la subred, y solo admiten reglas de permiso. 
+
+- permite el trafico en funcion de un protocolo IP, un puerto o una direccion IP, y utiliza reglas con estado, el trafico se restingre con direccion IP , puerto, ip origin o destino y bloque CIDR
+
+#### grupos de seguridad predeterminados y nuevos
+
+de forma predeterminada, los SG security groups. se incluye una regla de salida que permite que todo el trafico salga, es posible quitar esa regla y agregar reglas de salida que permitan unicamente cierta parte especifica del trafico saliente. si su grupo de segurida no tiene reglas de salida, no se permite el trafico saliente que se origina desde su instancia.
+
+#### reglas personalizadas de los grupos de seguridad
+
+Con las reglas de las grupos de seguridad. puede filtrar trafico en funcion de los protocolos y numeros de puertos, los grupos de seguridad son con estado. si envian una solicitud desde su instancia, se permite que el trafico de respuesta para esa solicitud fluya sin importar las reglas de entrada del grupo de seguridad.
+
+#### encadenamiento de grupos de seguridad
+
+- una cadena de grupos de seguridad. establece de forma escalonada el flujo de acceso a los recursos. determinando una serie de reglas, que permiten un trafico de un nivel superior hasta un nivel inferior. los grupos de seguridad funcionan como firewalls para evitar que una filtracion de segurdiad en un nivel proporcione automaticamente acceso a toda la subred de tos los recusos al cliente comprometido.
+ 
+ ### Comparacion entre grupos de seguridad y ACL de la red
+
+ un grupo de seguridad actua como firewalls para las instancias de EC2 asociadas, ya que controla el trafico entrante y saliente en el nivel de la instancia. 
+
+ Las ACL de la red actuan como un firewall para subredes asociadas y controla el traico entrante y saliente e el nivel de la subred. una ACL de la red deniega la comunicacion de forma predeterminada. el orden de las reglas de la ACL de la red es importante. 
+
+| Grupos de seguridad | ACL de la red | 
+|--------------------------- | ----------------------- |
+| los grupos de seguridad actuan como firewall de la instancia ec2 asociadas y esta asociadas con la interfaz de red elastica implementada por el hipervisor | las ACL de red actuan como firewall para las subredes asociadas | 
+| controlan el trafico entrante y saliente al nivel de la instancia | controlan el trafico entrante y saliente al nivel de la subred |
+| Solo admite reglas de permiso | admite las reglas de permiso y denegacion | 
+| es un firewall con estado | es un firewall sin estado |
+| se debe asignar manualmente a las instancias | se aplica automaticamente cuando las instancias se agregan a la subred |
+
+#### Caso de uso de una ACL de la red 
+
+la ACL de la red controla el acceso a las instancias en una subred y actua como capa de defensa de respaldo, las reglas de ACL de la red se aplica na todas las instancias en la subred.
+
+# Computacion como servicio
+
+existen 3 tipos de opciones a nivel fundamental: maquinas virtuales VM, servicios de contenedores y computacion sin servidor. 
+
+## eleccion de la configuracion de computacion adecuada.
+ 
+ al diseñar tu arquitectura en AWS, necesitara computacion para ejecutar sus servidores en la nube. AWS ofrece varias opciones de computacion. en primer lugar, debe saber que servicio de computacion usar para cada caso de uso. 
+
+ > un hipervisor  es un software o firmware que permite compartir recursos de hardware fisico en una o mas maquinas virutales, el hipervisor aprovisiona los recursos para crear y ejecutar las maquinas virtuales. 
+
+ el EC2 es un servicio que proporciona la capacidad de computacion segura y redimensionable en la nube. puede aprovisionar servidores virtuales denomianadas instancias.
+
+### daremos un repaso rapido por EC2
+
+es com un servidor en las instalaciones tradicional, pero esta disponible en la nube. puede admitir cargas de trabajo coom alojamiento web, aplicaciones, bases de datos, servicios de autenticacion y ccualquier otra cosa que un servidor pueda admitir. 
+
+#### consideraciones sobre el lanzamiento de las instancias de EC2
+
+1. *Nombre y etiquetas*: se recomienda agregar metadatos a los recursos en forma de etiquetas, en tipo clave valor para filtrar y agrupas cada uno de nuestros recursos o preyectos. con ellas ademas podemos administrar el control de acceso a los recursos, realizar seguimiento de los costos y ayudar a automatizar tareas y mantener todo organizado. 
+2. *Aplicacion e imagen de SO*: que aplicacion o sistema operativo ejecutara esta instancia? 
+3. *tipo y tamaño de la instancia*: que requisitos tecnicos debe cumplir? 
+4. *par de claves*: como se conectara a la instancia con otros componentes de la aplicaion y como se autenticara el acceso?.
+5. *Redes y seguridad*: que nube privada virtual (vpc), subred y grupos de seguridad utilizara?.
+6. *Configuracion del almacenamiento.* : que tipo de almacenamiento de bloques es mejor para su caso de uso??
+7. *ubicacion y tenencia*: Donde debe ejecutar sus intancias de EC2? 
+8. *Scripts y metadatos* : que puede hacer para automatizar su lanzamiento? 
+
+### AMI 
+
+una ami podemos decir que proporciona la informacion necesaria para lanzar una instancia, un Servidor virtual en la nube. cuando necesitas varias instancias con la misma configuracion.puede lanzarlas desde la misma AMI. Cuando necesite instancias con distintas configuraciones. puede usar distintas Ami para lanzarlas. 
+
+**Que incluye**
+
+- una plantilla para el volumen raiz de la instancia, por ejemplo un sistema operativo, aplicaciones y un servidor de aplicaciones. 
+- permisos de lanzamiento que controlan que cuentas de aws pueden utilizar la AMI para lanzar instancias.
+- asignacion de dispositivos de bloques que especifican los volumenes que deben adjutnarse a la instancia cuando se lanza.
+
+#### en donde se obtiene una AMI
+
+1. utilizar las AMI prediseñadas de AWS
+2. Buscar en el Marketplaces miles de soluciones 
+3. cree tus propias AMI manualmente o utilice el generador de AMI para EC2
+
+#### explicacion de los nombres de tipos de instancias.
+
+sabemos que existen cientos de tipos de instancias a elejir, asi que es mejor clasificarlas de acuerdo a su uso. AWS trabaja con una nomenclatura. aprender a diferencias entre los tipos de isntancia es crucial para nuestro proyecto, pues uno de los pilares es la eficiencia en el rendimiento. 
+
+    c6g.xlarge
+
+*c* - la familia de instancia: la primera letra es la familia. entonces la familia c, esta optimizada para computacion, existen de uso general, instancias expandibles e intancias de uso intensivo y para memoria, etc.
+*6* - la generacion: el numero indica la generacion, que aumenta con el paso del teimpo pues AWS actualiza su hardware en sus centros de datos.
+*g* - a veces hay una o mas letras despues de lageneracion, representan propiedades adicionales. por ejemplo la *g* represnta *graviton2*, un procesador de ARM desarrollado por AWS. 
+*xlarge* - la ultima parte representa el tamaño de la instancia. Esto incluye la CPU, la memoria, el almacenamiento y el rendimiento de la red. 
+
+* recuerda estudiar las familias de instancias de EC2
+
+1. De uso general
+2. optimizada para computacion
+3. optimizadas para memoria
+4. Computo acelerado
+5. Optimizadas para el almacenamiento
+6. Optimizadas para la computacion de alto rendimiento HPC
+
+## AWS computer Optimizer 
+
+utilizar **Machine Learning** para analizar la configuracion actual de sus recursos y sus datos de uso de CloudWatch. Recibira recomendaciones de computacion segun su configuracion y uso.
+
+las recomendaciones se pueden integrar en diferentes servicios. por ejemplo, se pueden exportar a S3 donde se intengran al explorador de costso de AWS y System Manager.
+
+## Pär de claves
+
